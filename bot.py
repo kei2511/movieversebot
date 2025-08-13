@@ -17,18 +17,14 @@ logger = logging.getLogger(__name__)
 # Aktifkan nest_asyncio untuk mengatasi masalah event loop
 nest_asyncio.apply()
 
-# Load environment variables
-from dotenv import load_dotenv
-load_dotenv()
-
-# Constants
-TMDB_API_KEY = os.getenv('TMDB_API_KEY')
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+# Get environment variables (Railway sets them automatically)
+TMDB_API_KEY = os.environ.get('TMDB_API_KEY') or os.environ.get('TMDB_API_KEY')
+BOT_TOKEN = os.environ.get('BOT_TOKEN') or os.environ.get('BOT_TOKEN')
 
 if not BOT_TOKEN:
-    raise ValueError("BOT_TOKEN environment variable is required")
+    raise ValueError("BOT_TOKEN environment variable is required - check Railway Variables")
 if not TMDB_API_KEY:
-    raise ValueError("TMDB_API_KEY environment variable is required")
+    raise ValueError("TMDB_API_KEY environment variable is required - check Railway Variables")
 FAVORITES_FILE = "favorites.json"
 
 # Create empty favorites file if it doesn't exist
