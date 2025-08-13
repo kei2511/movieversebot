@@ -18,8 +18,12 @@ logger = logging.getLogger(__name__)
 nest_asyncio.apply()
 
 # Get environment variables (Railway sets them automatically)
-TMDB_API_KEY = os.environ.get('TMDB_API_KEY') or os.environ.get('TMDB_API_KEY')
-BOT_TOKEN = os.environ.get('BOT_TOKEN') or os.environ.get('BOT_TOKEN')
+TMDB_API_KEY = os.environ.get('TMDB_API_KEY')
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+
+# Debug logging for Railway
+logger.info(f"BOT_TOKEN exists: {bool(BOT_TOKEN)}")
+logger.info(f"TMDB_API_KEY exists: {bool(TMDB_API_KEY)}")
 
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable is required - check Railway Variables")
